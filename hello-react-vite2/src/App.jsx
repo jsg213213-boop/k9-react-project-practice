@@ -17,6 +17,8 @@ function App() {
         </div>
         <div>
           <h1>Get started</h1>
+          <h2>이상용 테스트</h2>
+          <h3>오늘 점심 뭐 먹죠?</h3>
           <p>
             Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
           </p>
