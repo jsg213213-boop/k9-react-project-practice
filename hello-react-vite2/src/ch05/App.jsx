@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import ValidationSample from './ValidationSample';
+import JoinForm from '../ch04/JoinForm';
 
 class App extends Component {
   render() {
@@ -8,6 +9,8 @@ class App extends Component {
         <h1>ch05, dom에 ref 달기</h1>
         <h2>연습1, 간단한 유효성 체크 확인.</h2>
         <ValidationSample></ValidationSample>
+        <h2>연습2, 앞시간에 회원가입폼에서, 특정 입력창에 포커스 주기 복습</h2>
+        <JoinForm></JoinForm>
       </div>
     );
   }
