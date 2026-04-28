@@ -74,6 +74,9 @@ const JoinForm = () => {
       <input
         type="text"
         name="username"
+        // 방법1,
+        // 순서1,
+        ref={passwordConfirmRef}
         placeholder="username 입력해주세요"
         value={username}
         onChange={onChange}
@@ -95,9 +98,6 @@ const JoinForm = () => {
       <input
         type="password"
         name="passwordConfirm"
-        // 방법1,
-        // 순서1,
-        ref={passwordConfirmRef}
         placeholder="passwordConfirm 입력해주세요"
         value={passwordConfirm}
         onChange={onChange}

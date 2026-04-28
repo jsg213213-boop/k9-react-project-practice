@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import ValidationSample from './ValidationSample';
 import JoinForm from '../ch04/JoinForm';
+import ScrollBox from './ScrollBox';
 
 class App extends Component {
   render() {
@@ -11,6 +12,8 @@ class App extends Component {
         <ValidationSample></ValidationSample>
         <h2>연습2, 앞시간에 회원가입폼에서, 특정 입력창에 포커스 주기 복습</h2>
         <JoinForm></JoinForm>
+        <h2>연습3, 스크롤에 ref 달기, 제어 연습</h2>
+        <ScrollBox></ScrollBox>
       </div>
     );
   }
