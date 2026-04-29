@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Counter from './Counter';
 import Ex1 from './Ex1';
 import Ex2 from './Ex2';
@@ -7,6 +7,9 @@ import Ex3 from './Ex3';
 import Ex4 from './Ex4';
 
 const App = () => {
+  //Ex4 에서, 언마운트 효과 내기를 위한 상태 추가.
+  const [isShowing, setIsShowing] = useState(true);
+
   return (
     <div>
       <h1>ch8 hooks 특수 함수 알아보기</h1>
@@ -43,7 +46,12 @@ const App = () => {
         setInterval(콜백함수, 특정시간(ms)), 1000ms = 1초 힌트2 -
         clearInterval(interval); // 언마운트 시 타이머 정리
       </p>
-      <Ex4></Ex4>
+      <h3>Ex4 언마운트 테스트 </h3>
+      <button onClick={() => setIsShowing(!isShowing)}>
+        {isShowing ? '타이머 컴포넌트 숨기기' : '타이머 컴포넌트 보이기'}
+      </button>
+      <hr />
+      {isShowing && <Ex4 />}
     </div>
   );
 };
