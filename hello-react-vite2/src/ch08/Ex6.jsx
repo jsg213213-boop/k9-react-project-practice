@@ -40,6 +40,16 @@ function reducer(state, action) {
         // 복구를 할 예정, 삭제한 요소를, 보관하는 배열에 추가.
         deletedItems: [...state.deletedItems, action.payload],
       };
+
+    case 'UPDATE_ITEM':
+      return {
+        ...state,
+        names: state.names.map((name) =>
+          name.id === action.payload.id
+            ? { ...name, text: action.payload.newText }
+            : name,
+        ),
+      };
   }
 }
 
@@ -79,6 +89,15 @@ const Ex6 = () => {
     }
   };
 
+  // 수정 작업 : U
+  const rightClick = (e, id, text) => {
+    e.preventDefault(); // 브라우저에서 기본 우클릭 메뉴가 뜨는 것을 방지하는 기능.
+    const newText = prompt('수정할 내용을 입력하세요.', text);
+    if (newText && newText.trim()) {
+      dispatch({ type: 'UPDATE_ITEM', payload: { id, newText } });
+    }
+  };
+
   // 추가 이벤트 핸들러 더 있음. 추가 할 예정.
 
   //6. 출력용 배열 , names 를 그리기 작업 : 6장 컴포넌트 반복, 내장 함수, map 이용했음.
@@ -86,8 +105,8 @@ const Ex6 = () => {
     <li
       key={name.id}
       onDoubleClick={() => onRemove(name.id)}
-      //   // 수정 순서3
-      //   onContextMenu={() => rightClick(name.id, name.text)}
+      // 수정 순서3
+      onContextMenu={(e) => rightClick(e, name.id, name.text)}
     >
       {name.text}
     </li>
