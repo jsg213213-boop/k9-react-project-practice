@@ -24,7 +24,7 @@ const Ex9 = () => {
         ref={inputEl}
         value={text}
         onChange={(e) => setText(e.target.value)}
-        placeholder="숫자 입력"
+        placeholder="텍스트 입력"
       />
 
       <button onClick={onInsert}>추가</button>

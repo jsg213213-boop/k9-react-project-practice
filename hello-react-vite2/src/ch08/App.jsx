@@ -14,6 +14,7 @@ import Average2 from './Average2';
 import Ex8 from './Ex8';
 import Average3 from './Average3';
 import Ex9 from './Ex9';
+import Ex10 from './Ex10';
 
 const App = () => {
   //Ex4 에서, 언마운트 효과 내기를 위한 상태 추가.
@@ -116,6 +117,15 @@ const App = () => {
         자동으로 포커스가 되돌아오는 컴포넌트를 만드세요. Average3 ,참고
       </p>
       <Ex9></Ex9>
+      <br />
+      <hr />
+      <h3>실습10 </h3>
+      <p>
+        useRef로 렌더링 횟수를 추적하는 컴포넌트를 만드세요. 버튼을 클릭할
+        때마다 state가 변경되고, 콘솔에 현재까지 렌더링된 횟수가 출력되어야
+        합니다. Average3 ,참고
+      </p>
+      <Ex10></Ex10>
       <br />
     </div>
   );
