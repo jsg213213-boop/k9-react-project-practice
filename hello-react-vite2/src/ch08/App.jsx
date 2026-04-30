@@ -12,6 +12,7 @@ import Average from './Average';
 import Ex7 from './Ex7';
 import Average2 from './Average2';
 import Ex8 from './Ex8';
+import Average3 from './Average3';
 
 const App = () => {
   //Ex4 에서, 언마운트 효과 내기를 위한 상태 추가.
@@ -103,6 +104,11 @@ const App = () => {
       </p>
       <Ex8></Ex8>
       <br />
+      <h2>useRef 기본 예시 연습</h2>
+      <Average3></Average3>
+      <br />
+      <hr />
+      <hr />
     </div>
   );
 };
