@@ -11,6 +11,7 @@ import Ex6 from './Ex6';
 import Average from './Average';
 import Ex7 from './Ex7';
 import Average2 from './Average2';
+import Ex8 from './Ex8';
 
 const App = () => {
   //Ex4 에서, 언마운트 효과 내기를 위한 상태 추가.
@@ -93,6 +94,15 @@ const App = () => {
       <Average2></Average2>
       <br />
       <hr />
+      <hr />
+      <h3>실습8 </h3>
+      <p>
+        useCallback을 이용해서 handleIncrease, handleDecrease, handleReset
+        함수를 메모이제이션하는 카운터 컴포넌트를 만드세요. Counter 를 참고해서,
+        증가, 감소, 리셋 함수를 useCallback 이용해서, 만들기
+      </p>
+      <Ex8></Ex8>
+      <br />
     </div>
   );
 };
