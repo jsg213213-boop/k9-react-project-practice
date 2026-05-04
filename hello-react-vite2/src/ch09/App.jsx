@@ -2,6 +2,7 @@
 import './App.css';
 import Ex1 from './Ex1';
 import Ex2 from './Ex2';
+import SassComponent from './SassComponent';
 import SassEx1 from './SassEx1';
 
 const App = () => (
@@ -34,6 +35,10 @@ const App = () => (
     <h2>Sass 예제1</h2>
     <p>버튼에 색상, 크기, 모서리 설정 부분 변수로 이용해서 사용해보기.</p>
     <SassEx1></SassEx1>
+
+    <h2>Sass 예제2</h2>
+    <p>공통 util.scss 에서 만든 내용을 SassComponent.scss 활용 연습 확인.</p>
+    <SassComponent></SassComponent>
   </div>
 );
 
