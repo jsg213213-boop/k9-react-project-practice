@@ -2,6 +2,7 @@
 import './App.css';
 import Ex1 from './Ex1';
 import Ex2 from './Ex2';
+import SassEx1 from './SassEx1';
 
 const App = () => (
   <div className="App">
@@ -29,6 +30,10 @@ const App = () => (
       Ex2.jsx 에 만들었던 css 적용해보기.
     </p>
     <Ex2>점심메뉴</Ex2>
+
+    <h2>Sass 예제1</h2>
+    <p>버튼에 색상, 크기, 모서리 설정 부분 변수로 이용해서 사용해보기.</p>
+    <SassEx1></SassEx1>
   </div>
 );
 
