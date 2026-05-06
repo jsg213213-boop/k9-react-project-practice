@@ -9,6 +9,7 @@ import Ex5 from './Ex5';
 import Ex6 from './Ex6';
 import Ex7 from './Ex7';
 import Ex8 from './Ex8';
+import Ex9 from './Ex9';
 import ModuleCss from './ModuleCss';
 import SassComponent from './SassComponent';
 import SassEx1 from './SassEx1';
@@ -130,6 +131,29 @@ const App = () => (
       title="보조 카드 "
       content="보라색 계열 테마의 카드."
     ></Ex8>
+    <h2>실습9</h2>
+    <p>
+      **원하는 스타일링 방식을 골라** 아래 UI를 구현해 보세요! **요구사항:** -
+      상품 카드 컴포넌트 (`ProductCard`) - 상품 이름, 가격, 할인
+      여부(`isDiscounted`) 표시 - `isDiscounted`가 true이면 가격에 빨간색 "SALE"
+      배지 표시 - 카드에 hover 효과 (살짝 위로 이동: `transform:
+      translateY(-4px)`)
+    </p>
+    <div
+      style={{
+        display: 'flex',
+        gap: '1rem',
+        padding: '2rem',
+        flexWrap: 'wrap',
+      }}
+    >
+      <Ex9 name="무선 이어폰" price={30000} isDiscounted={true}></Ex9>
+      <Ex9 name="스마트워치" price={100000} isDiscounted={true}></Ex9>
+      <Ex9 name="무선 이어폰" price={30000} isDiscounted={true}></Ex9>
+      <Ex9 name="스마트워치" price={100000} isDiscounted={true}></Ex9>
+      <Ex9 name="무선 이어폰" price={30000} isDiscounted={true}></Ex9>
+      <Ex9 name="스마트워치" price={100000} isDiscounted={true}></Ex9>
+    </div>
   </div>
 );
 
