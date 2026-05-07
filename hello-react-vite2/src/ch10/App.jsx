@@ -21,6 +21,45 @@ const App = () => {
       checked: false,
       priority: 'low',
     },
+    { id: 4, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
+    {
+      id: 5,
+      text: '컴포넌트 스타일링해 보기',
+      checked: true,
+      priority: 'medium',
+    },
+    {
+      id: 6,
+      text: '일정 관리 앱 만들어 보기',
+      checked: false,
+      priority: 'low',
+    },
+    { id: 7, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
+    {
+      id: 8,
+      text: '컴포넌트 스타일링해 보기',
+      checked: true,
+      priority: 'medium',
+    },
+    {
+      id: 9,
+      text: '일정 관리 앱 만들어 보기',
+      checked: false,
+      priority: 'low',
+    },
+    { id: 10, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
+    {
+      id: 11,
+      text: '컴포넌트 스타일링해 보기',
+      checked: true,
+      priority: 'medium',
+    },
+    {
+      id: 12,
+      text: '일정 관리 앱 만들어 보기',
+      checked: false,
+      priority: 'low',
+    },
   ]);
 
   // 다음 id 추적 (useState 아닌 useRef 사용 → 리렌더링 불필요)
@@ -106,21 +145,107 @@ const App = () => {
     );
   }, []);
 
+  // 실습8,  검색 및 페이지네이션(커서기반) 기능 추가
+  // ── 실습8, ────────────────────────────────────────────
+  // 순서1
+  // 1) 검색어 상태 변수 2) 커서 상태 변수
+  const [keyword, setKeyword] = useState('');
+  const [cursor, setCursor] = useState(10);
+
+  // 실습8,  검색 및 페이지네이션(커서기반) 기능 추가
+  // ── 실습8, ─────
+  // 순서2   ────────────────────────────────────────────
+  // 검색이된 todos 필터 기능
+  const filteredTodos = useMemo(() => {
+    return todos.filter((todo) =>
+      todo.text.toLowerCase().includes(keyword.toLowerCase()),
+    );
+  }, [todos, keyword]);
+
+  // 페이지네이션 기능, 10개씩 자르는 기능.
+  const visibleTods = useMemo(() => {
+    return filteredTodos.slice(0, cursor); // cursor(=10), 마지막 인덱스는 제외함.
+  }, [filteredTodos, cursor]);
+
+  // 상태 변수, todos가 , 10개보다 더 많이 있는 경우에는 더보기가 가능한 상태 변수.
+  const hasMore = cursor < filteredTodos.length;
+  // 순서2  ────────────────────────────────────────────
+
+  // 실습8,  검색 및 페이지네이션(커서기반) 기능 추가
+  // ── 실습8, ─────
+  // 순서3   ────────────────────────────────────────────
+  // 검색 함수 , 더보기 함수 추가
+
+  const onChangeKeyword = useCallback((e) => {
+    setKeyword(e.target.value);
+    setCursor(10);
+  }, []);
+
+  const onLoadMore = useCallback(() => {
+    setCursor((prevCursor) => prevCursor + 10);
+  }, []);
+
+  // 순서3   ────────────────────────────────────────────
+
   // ── 렌더링 ────────────────────────────────────────────
   // 실습5,  작업2, props 로 전달. 전체갯수, 체크된 갯수
   // `TodoTemplate`에 prop으로 전달하세요.
   return (
-    <TodoTemplate total={todos.length} checked={checkedCount}>
-      <TodoInsert onInsert={onInsert} />
-      {/* // ── 실습7, ────────────────────────────────────────────
+    <div>
+      {/* // 순서4 ──────────────────────────────────────────── */}
+      <TodoTemplate total={todos.length} checked={checkedCount}>
+        <TodoInsert onInsert={onInsert} />
+        {/* // ── 실습7, ────────────────────────────────────────────
   // 순서2 */}
-      <TodoList
-        todos={todos}
-        onRemove={onRemove}
-        onToggle={onToggle}
-        onUpdate={onUpdate}
-      />
-    </TodoTemplate>
+        {/* //화면 동기화 없이, 일단 단순 기능만 추가하기.
+    // 실습8,  검색 및 페이지네이션(커서기반) 기능 추가
+    // ── 실습8, ─────
+    // 순서4   ────────────────────────────────────────────
+    // 검색어 입력창 */}
+        <input
+          value={keyword}
+          onChange={onChangeKeyword}
+          placeholder="검색어를 입력하세요"
+          style={{
+            width: '100%',
+            padding: '0.6rem',
+            fontSize: '1rem',
+            boxSizing: 'border-box',
+          }}
+        />
+
+        <TodoList
+          // 기존 todos 배열에서, 10개씩 페이지네이션이 된 todos 로 교체 작업
+          todos={visibleTods}
+          // 순서4   ────────────────────────────────────────────
+          onRemove={onRemove}
+          onToggle={onToggle}
+          onUpdate={onUpdate}
+        />
+        {/* // 실습8,  검색 및 페이지네이션(커서기반) 기능 추가
+    // ── 실습8, ─────
+    // 순서5   ────────────────────────────────────────────
+    // 만약, 페이지네이션 결과가 더 있는 경우, 더보기 추가. */}
+        {hasMore && (
+          <button
+            onClick={onLoadMore}
+            style={{
+              width: '100%',
+              padding: '0.7rem',
+              border: 'none',
+              background: '#22b8cf',
+              color: 'white',
+              fontSize: '1rem',
+              cursor: 'pointer',
+            }}
+          >
+            더보기
+          </button>
+        )}
+
+        {/* // 순서5   ──────────────────────────────────────────── */}
+      </TodoTemplate>
+    </div>
   );
 };
 

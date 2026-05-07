@@ -95,6 +95,9 @@ const TodoListItem = ({ todo, onRemove, onToggle, onUpdate }) => {
           </div>
 
           {/* 수정 버튼: 클릭 시 수정 */}
+          {/* // ── 실습7, ────────────────────────────────────────────
+  // 순서9
+  // 조건부 렌더링 */}
           <div className="update" onClick={() => setIsEditing(true)}>
             <AiFillEdit />
           </div>

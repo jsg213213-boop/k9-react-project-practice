@@ -10,6 +10,7 @@ import React from 'react';
 // 1 App.jsx
 // 2 TodoInsert.jsx
 // 3 TodoListItem.jsx
+// 4 TodoListItem.scss
 // 순서 1 ~ 11
 
 const Ex6 = () => {
