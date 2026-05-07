@@ -6,6 +6,12 @@ import React from 'react';
 //     - medium: 노란색 `#fcc419`
 //     - low: 초록색 `#51cf66`
 
+// 작업 진행 순서 파일
+// 1 App.jsx
+// 2 TodoInsert.jsx
+// 3 TodoListItem.jsx
+// 순서 1 ~ 11
+
 const Ex6 = () => {
   return <div></div>;
 };
