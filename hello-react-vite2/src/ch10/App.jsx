@@ -71,6 +71,7 @@ const App = () => {
   }, []);
 
   // 실습6,  onInsert 기능에 priority 파라미터 추가
+  // ── 실습6, ────────────────────────────────────────────
   // 순서1,
   const onInsert = useCallback((text, priority = 'medium') => {
     // 빈문자열이면, onInsert 함수 기능을 나간다.
@@ -91,13 +92,34 @@ const App = () => {
     nextId.current += 1; // 다음 id 증가
   }, []); // 의존성 없음 → 마운트 시 1회만 생성
 
+  // 실습7,  수정 기능 추가
+  // ── 실습7, ────────────────────────────────────────────
+  // 순서1
+  const onUpdate = useCallback((id, newText) => {
+    if (!newText.trim()) {
+      alert('빈 문자열은 입력 불가입니다.');
+      return;
+    }
+
+    setTodos((todos) =>
+      todos.map((todo) => (todo.id === id ? { ...todo, text: newText } : todo)),
+    );
+  }, []);
+
   // ── 렌더링 ────────────────────────────────────────────
   // 실습5,  작업2, props 로 전달. 전체갯수, 체크된 갯수
   // `TodoTemplate`에 prop으로 전달하세요.
   return (
     <TodoTemplate total={todos.length} checked={checkedCount}>
       <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
+      {/* // ── 실습7, ────────────────────────────────────────────
+  // 순서2 */}
+      <TodoList
+        todos={todos}
+        onRemove={onRemove}
+        onToggle={onToggle}
+        onUpdate={onUpdate}
+      />
     </TodoTemplate>
   );
 };
