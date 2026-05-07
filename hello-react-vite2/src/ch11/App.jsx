@@ -13,7 +13,7 @@ const App = () => {
   // ]);
   function createBulkTodos() {
     const array = [];
-    for (let i = 1; i <= 2500; i++) {
+    for (let i = 1; i <= 50000; i++) {
       array.push({ id: i, text: `할 일${i}`, checked: false });
     }
     return array;
@@ -27,7 +27,7 @@ const App = () => {
 
   // ── 할 일 추가 ─────────────────────────────────────────
   // concat: 기존 배열은 그대로 두고 새 배열을 반환 (불변성 유지)
-  const onInsert = useCallback((text) => {
+  const onInsert = (text) => {
     const todo = {
       id: nextId.current,
       text,
@@ -36,7 +36,7 @@ const App = () => {
     // 함수형 업데이트: 항상 최신 todos 기준으로 업데이트
     setTodos((todos) => todos.concat(todo));
     nextId.current += 1; // 다음 id 증가
-  }, []); // 의존성 없음 → 마운트 시 1회만 생성
+  }; // 의존성 없음 → 마운트 시 1회만 생성
 
   // ── 할 일 삭제 ─────────────────────────────────────────
   // filter: id가 다른 것만 남기면 해당 id 항목이 제거됨

@@ -6,6 +6,7 @@ import {
 } from 'react-icons/md';
 import cn from 'classnames';
 import './TodoListItem.scss';
+import React from 'react';
 
 const TodoListItem = ({ todo, onRemove, onToggle }) => {
   const { id, text, checked } = todo; // 구조 분해 할당
@@ -29,4 +30,5 @@ const TodoListItem = ({ todo, onRemove, onToggle }) => {
   );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);
+// export default TodoListItem;
