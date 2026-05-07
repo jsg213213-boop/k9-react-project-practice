@@ -1,69 +1,120 @@
 // src/App.js
-import { useState, useRef, useCallback, useMemo } from 'react';
+import { useState, useRef, useCallback, useMemo, useEffect } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 
+// 더미데이터 임시 저장소 위치
+
+//
+
 const App = () => {
   // ── 상태 선언 ──────────────────────────────────────────
   // 순서 11, 기존의 배열 값에도, priority 필드 추가.
-  const [todos, setTodos] = useState([
-    { id: 1, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
-    {
-      id: 2,
-      text: '컴포넌트 스타일링해 보기',
-      checked: true,
-      priority: 'medium',
-    },
-    {
-      id: 3,
-      text: '일정 관리 앱 만들어 보기',
-      checked: false,
-      priority: 'low',
-    },
-    { id: 4, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
-    {
-      id: 5,
-      text: '컴포넌트 스타일링해 보기',
-      checked: true,
-      priority: 'medium',
-    },
-    {
-      id: 6,
-      text: '일정 관리 앱 만들어 보기',
-      checked: false,
-      priority: 'low',
-    },
-    { id: 7, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
-    {
-      id: 8,
-      text: '컴포넌트 스타일링해 보기',
-      checked: true,
-      priority: 'medium',
-    },
-    {
-      id: 9,
-      text: '일정 관리 앱 만들어 보기',
-      checked: false,
-      priority: 'low',
-    },
-    { id: 10, text: '리액트의 기초 알아보기', checked: true, priority: 'high' },
-    {
-      id: 11,
-      text: '컴포넌트 스타일링해 보기',
-      checked: true,
-      priority: 'medium',
-    },
-    {
-      id: 12,
-      text: '일정 관리 앱 만들어 보기',
-      checked: false,
-      priority: 'low',
-    },
-  ]);
+  const [todos, setTodos] = useState(() => {
+    // 실습9,  로컬 스토리지 저장 및 불러오기 작업
+    // ── 실습9, ────────────────────────────────────────────
+    // 순서1,
+
+    // 로컬 스토리지에 값 가져오기
+    const savedTodos = localStorage.getItem('todos');
+
+    // 저장된 값이 있으면 JSON -> 객체 변환
+    if (savedTodos) {
+      return JSON.parse(savedTodos);
+    }
+
+    // 없으면, 기본값 사용,
+    return [
+      {
+        id: 1,
+        text: '리액트의 기초 알아보기',
+        checked: true,
+        priority: 'high',
+      },
+      {
+        id: 2,
+        text: '컴포넌트 스타일링해 보기',
+        checked: true,
+        priority: 'medium',
+      },
+      {
+        id: 3,
+        text: '일정 관리 앱 만들어 보기',
+        checked: false,
+        priority: 'low',
+      },
+      {
+        id: 4,
+        text: '리액트의 기초 알아보기',
+        checked: true,
+        priority: 'high',
+      },
+      {
+        id: 5,
+        text: '컴포넌트 스타일링해 보기',
+        checked: true,
+        priority: 'medium',
+      },
+      {
+        id: 6,
+        text: '일정 관리 앱 만들어 보기',
+        checked: false,
+        priority: 'low',
+      },
+      {
+        id: 7,
+        text: '리액트의 기초 알아보기',
+        checked: true,
+        priority: 'high',
+      },
+      {
+        id: 8,
+        text: '컴포넌트 스타일링해 보기',
+        checked: true,
+        priority: 'medium',
+      },
+      {
+        id: 9,
+        text: '일정 관리 앱 만들어 보기',
+        checked: false,
+        priority: 'low',
+      },
+      {
+        id: 10,
+        text: '리액트의 기초 알아보기',
+        checked: true,
+        priority: 'high',
+      },
+      {
+        id: 11,
+        text: '컴포넌트 스타일링해 보기',
+        checked: true,
+        priority: 'medium',
+      },
+      {
+        id: 12,
+        text: '일정 관리 앱 만들어 보기',
+        checked: false,
+        priority: 'low',
+      },
+    ];
+
+    // ── 실습9,순서1, ────────────────────────────────────────────
+  });
 
   // 다음 id 추적 (useState 아닌 useRef 사용 → 리렌더링 불필요)
-  const nextId = useRef(4);
+  // const nextId = useRef(4);
+
+  // 실습9,  로컬 스토리지 저장 및 불러오기 작업
+  // ── 실습9, ────────────────────────────────────────────
+  // 순서3,
+  // 오후에 이어서 진행하기.
+  // 새로 고침 이후에도, id 중복 방지.
+  const nextId = useRef(
+    todos.length > 0 ? Math.max(...todos.map((todo) => todo.id)) + 1 : 1,
+  );
+  // ── 실습9, 순서3,────────────────────────────────────────────
 
   // 실습5,  작업
   // const checkedCount = useMemo(콜백함수, [의존성배열])
@@ -163,7 +214,7 @@ const App = () => {
   }, [todos, keyword]);
 
   // 페이지네이션 기능, 10개씩 자르는 기능.
-  const visibleTods = useMemo(() => {
+  const visibleTodos = useMemo(() => {
     return filteredTodos.slice(0, cursor); // cursor(=10), 마지막 인덱스는 제외함.
   }, [filteredTodos, cursor]);
 
@@ -186,6 +237,16 @@ const App = () => {
   }, []);
 
   // 순서3   ────────────────────────────────────────────
+
+  // 실습9,  로컬 스토리지 저장 및 불러오기 작업
+  // ── 실습9, ────────────────────────────────────────────
+  // 순서2,
+  // todos 변경될 때마다, localStorage 저장.
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  // ── 실습9,순서2, ────────────────────────────────────────────
 
   // ── 렌더링 ────────────────────────────────────────────
   // 실습5,  작업2, props 로 전달. 전체갯수, 체크된 갯수
@@ -216,7 +277,7 @@ const App = () => {
 
         <TodoList
           // 기존 todos 배열에서, 10개씩 페이지네이션이 된 todos 로 교체 작업
-          todos={visibleTods}
+          todos={visibleTodos}
           // 순서4   ────────────────────────────────────────────
           onRemove={onRemove}
           onToggle={onToggle}
