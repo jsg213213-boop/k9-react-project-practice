@@ -3,6 +3,7 @@ import { useState, useRef, useCallback } from 'react';
 import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
+import Ex1 from './ex/Ex1';
 
 const App = () => {
   // ── 상태 선언 ──────────────────────────────────────────
@@ -58,10 +59,14 @@ const App = () => {
 
   // ── 렌더링 ────────────────────────────────────────────
   return (
-    <TodoTemplate>
-      <TodoInsert onInsert={onInsert} />
-      <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
-    </TodoTemplate>
+    <div>
+      <h2>실습1 풀이</h2>
+      <Ex1></Ex1>
+      <TodoTemplate>
+        <TodoInsert onInsert={onInsert} />
+        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
+      </TodoTemplate>
+    </div>
   );
 };
 
