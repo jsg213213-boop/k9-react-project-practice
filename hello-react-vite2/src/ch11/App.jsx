@@ -4,6 +4,8 @@ import TodoTemplate from './components/TodoTemplate';
 import TodoInsert from './components/TodoInsert';
 import TodoList from './components/TodoList';
 import Ex1 from './ex/Ex1';
+import Ex2 from './ex/Ex2';
+import Ex3 from './ex/Ex3';
 
 const App = () => {
   // ── 상태 선언 ──────────────────────────────────────────
@@ -62,6 +64,10 @@ const App = () => {
     <div>
       <h2>실습1 풀이</h2>
       <Ex1></Ex1>
+      <h2>실습2 풀이</h2>
+      <Ex2></Ex2>
+      <h2>실습3 풀이</h2>
+      <Ex3></Ex3>
       <TodoTemplate>
         <TodoInsert onInsert={onInsert} />
         <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} />
