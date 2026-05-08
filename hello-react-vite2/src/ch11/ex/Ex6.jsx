@@ -1,7 +1,29 @@
 import { memo, useCallback, useState } from 'react';
 
 // TODO: memo 적용하기
-function TodoItem({ todo, onToggle }) {
+// 전
+// function TodoItem({ todo, onToggle }) {
+//   console.log('TodoItem 렌더:', todo.text);
+//   return (
+//     <li
+//       style={{
+//         padding: '8px 0',
+//         borderBottom: '1px solid #eee',
+//         display: 'flex',
+//         gap: 8,
+//         alignItems: 'center',
+//       }}
+//     >
+//       <span style={{ cursor: 'pointer' }} onClick={() => onToggle(todo.id)}>
+//         {todo.checked ? '✅' : '⬜'}
+//       </span>
+//       <span>{todo.text}</span>
+//     </li>
+//   );
+// }
+
+// 후
+const TodoItem = memo(function TodoItem({ todo, onToggle }) {
   console.log('TodoItem 렌더:', todo.text);
   return (
     <li
@@ -19,10 +41,23 @@ function TodoItem({ todo, onToggle }) {
       <span>{todo.text}</span>
     </li>
   );
-}
+});
 
+//전
+// function TodoList({ todos, onToggle }) {
+//   console.log('TodoList 렌더');
+//   return (
+//     <ul style={{ listStyle: 'none', padding: 0 }}>
+//       {todos.map((todo) => (
+//         <TodoItem key={todo.id} todo={todo} onToggle={onToggle} />
+//       ))}
+//     </ul>
+//   );
+// }
+
+//후
 // TODO: memo 적용하기
-function TodoList({ todos, onToggle }) {
+const TodoList = memo(function TodoList({ todos, onToggle }) {
   console.log('TodoList 렌더');
   return (
     <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -31,11 +66,12 @@ function TodoList({ todos, onToggle }) {
       ))}
     </ul>
   );
-}
+});
 
 let nextId = 4;
 
 const Ex6 = () => {
+  console.log('Ex6 렌더');
   const [todos, setTodos] = useState([
     { id: 1, text: '리액트 공부', checked: false },
     { id: 2, text: '운동', checked: false },
@@ -44,13 +80,15 @@ const Ex6 = () => {
   const [input, setInput] = useState('');
 
   // TODO: useCallback 적용하기
-  const onToggle = (id) => {
+  const onToggle = useCallback((id) => {
+    console.log('onToggle useCallback 렌더');
     setTodos((prev) =>
       prev.map((t) => (t.id === id ? { ...t, checked: !t.checked } : t)),
     );
-  };
+  }, []);
 
   const onAdd = useCallback(() => {
+    console.log('onAdd useCallback 렌더');
     if (!input.trim()) return;
     setTodos((prev) => [
       ...prev,
