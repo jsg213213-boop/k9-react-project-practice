@@ -81,6 +81,8 @@ const Ex6 = () => {
 
   // TODO: useCallback 적용하기
   const onToggle = useCallback((id) => {
+    // useCallback 를 사용하면, 함수를 재생성 안함.
+    // onToggle 함수를 이용할 때는, 로그는 찍힙니다.!!
     console.log('onToggle useCallback 렌더');
     setTodos((prev) =>
       prev.map((t) => (t.id === id ? { ...t, checked: !t.checked } : t)),
